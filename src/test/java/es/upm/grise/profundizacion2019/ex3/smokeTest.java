@@ -8,6 +8,10 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+
 public class smokeTest {
 	MyClass my;
 	
@@ -33,5 +37,16 @@ public class smokeTest {
 		long SECONDS = 120;
 
 		assertEquals( t.getFutureTime(SECONDS, date1), date2 );
+	}
+
+	@Test
+	public void invokeGetFutureTime_OK() {
+		Time t = mock(Time.class);
+		long SECONDS = 60;
+		int n_times = 1;
+
+		my.nextTime(SECONDS);
+
+		verify(t, times(n_times)).getFutureTime(SECONDS);
 	}
 }
